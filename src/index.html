@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Joker client</title>
+    <script type="text/javascript">
+        /**
+         * @type {{
+         *      gamepath: string
+         *      entrypoint: string
+         *  }}
+         */
+        let params = {
+            gamepath: '',
+            entrypoint: ''
+        };
+        let gameKey = 'JOKER';
+        let game;
+
+        loadGameConfig()
+            .then(gameConfig => loadGame(gameConfig))
+            .then(gameConfig => runGame(gameConfig));
+
+        function loadGameConfig () {
+            return fetch('/assets/game.config.json')
+                .then(response => response.json())
+                .then(json => json);
+        }
+
+        function loadGame ({pathToGameBinaries, gameEntryPoint, ...rest}) {
+            return new Promise(resolve => {
+                if (!pathToGameBinaries) {
+                    throw new Error ('Game path empty!');
+                }
+
+                let script = document.createElement('script');
+                script.addEventListener('load', () => {
+                    resolve({...rest, pathToGameBinaries, gameEntryPoint})
+                }, false);
+                script.src = createURL(`${pathToGameBinaries}/${gameEntryPoint}`);
+                document.documentElement.appendChild(script);
+            });
+        }
+
+        function createURL (path) {
+            let location = window.location,
+                protocol = location.protocol,
+                host = location.hostname,
+                port = location.port,
+                fullPath = `${protocol}//${host}:${port}/${path}`;
+
+            console.log(`CREATED URL: ${fullPath}`);
+
+            return fullPath;
+        }
+
+        function runGame ({gameKey, ...rest}) {
+            let gameContainer = document.getElementById('gameContainer'),
+                gameInitData = {
+                    routeForLoadingAssets: rest.routeForLoadingAssets,
+                    assetsManifest: rest.assetsManifest,
+                    gameContainer: gameContainer
+                };
+            game = new window[gameKey](gameInitData);
+        }
+    </script>
+</head>
+<body>
+<div id="gameContainer" style="height: 700px;"></div>
+</body>
+</html>
