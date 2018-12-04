@@ -11,7 +11,7 @@ let {server, game} = JSON.parse(
 let app: Express.Application = Express();
 app.use(morgan('tiny'));
 
-app.use('/Joker.PureMVC.Game', serveStatic(path.join(__dirname, './../../Joker.PureMVC.Game')));
+app.use('/Joker.Game', serveStatic(path.join(__dirname, '../../Joker.Game')));
 app.use('/assets', serveStatic(path.resolve(__dirname, '../assets')));
 app.use(serveStatic(path.join(__dirname, './'), {
     'index': `index.html`
