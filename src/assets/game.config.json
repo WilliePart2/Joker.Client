@@ -1,6 +1,6 @@
 {
   "routeForLoadingAssets": "/assets",
-  "assetsManifest": "manifest.json",
+  "assetsManifest": "assets.manifest.json",
   "pathManifest": "",
   "pathToGameBinaries": "../../../Joker.Game/dist",
   "gameEntryPoint": "bundle.js",

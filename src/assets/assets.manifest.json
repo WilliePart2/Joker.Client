@@ -1,0 +1,11 @@
+{
+  "resources": [
+    {
+      "platform": ["All"],
+      "resourceURI": [
+        "img/roomBackground.png",
+        "img/Place.png"
+      ]
+    }
+  ]
+}
