@@ -30,7 +30,7 @@
         function loadGame ({pathToGameBinaries, gameEntryPoint, ...rest}) {
             return new Promise(resolve => {
                 if (!pathToGameBinaries) {
-                    throw new Error ('Game path empty!');
+                    throw new Error ('Game path is empty!');
                 }
 
                 let script = document.createElement('script');
@@ -57,6 +57,7 @@
         function runGame ({gameKey, ...rest}) {
             let gameContainer = document.getElementById('gameContainer'),
                 gameInitData = {
+                    ...rest,
                     routeForLoadingAssets: rest.routeForLoadingAssets,
                     assetsManifest: rest.assetsManifest,
                     gameContainer: gameContainer
