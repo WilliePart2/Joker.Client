@@ -3,7 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import morgan from 'morgan'
 import serveStatic from 'serve-static';
-let nodemon = require('nodemon');
 let {server, game} = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, './config/client.config.json'), {encoding: 'utf8'})
 );
@@ -20,19 +19,3 @@ app.use(serveStatic(path.join(__dirname, './'), {
 app.listen(server.port, () => {
     console.log(`Client running on ${server.port} port.`);
 });
-
-// Need to kill process with ts-node
-// process.on('SIGINT', () => {
-//     nodemon.emit('quit');
-//     process.exit(0);
-// });
-// process.on('SIGHUP', () => process.exit());
-// process.on('SIGTERM', () => process.exit());
-// process.on('SIGUSR2', () => process.exit());
-// process.on('exit', (code) => {
-//     nodemon.emit('quit');
-//     process.exit(code)
-// });
-// process.on('message', (msg) => console.log(msg));
-
-
