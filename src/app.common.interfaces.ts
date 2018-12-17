@@ -1,5 +1,15 @@
-import Express from 'express';
+import { Express, Request, Response } from 'express';
 
 export interface IExpressNotification {
-    context: Express.Application
+    context: Express,
+}
+
+export interface IStartupData extends IExpressNotification {
+
+}
+
+export interface IRouteNotification {
+    req: Request;
+    res: Response;
+    next: Function;
 }

@@ -14,3 +14,5 @@ export const playerSchema = new Schema({
         type: [cardSchema]
     }
 });
+
+export const playerModel = mongoose.model('player', playerSchema);

@@ -1,5 +1,5 @@
 import Express from 'express';
-import {Facade} from "../PureMVCMulticore/core/pureMVC/facade/Facade";
+import {Facade} from "../../PureMVCMulticore/core/pureMVC/facade/Facade";
 
 export class Router extends Facade {
     init (app: Express.Application) {
