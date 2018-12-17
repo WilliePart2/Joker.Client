@@ -7,10 +7,15 @@ import { RouteSignInToGameRoom } from "../router.notifications";
 
 export class RouterStartupCommand extends Module {
     async execute(notification: Notification<IStartupData>): Promise<any> {
-        return super.execute(notification);
+        super.execute(notification);
 
         let nBody: IStartupData = notification.body,
             context: Express = nBody.context;
+
+        // context.use('/sign-in-to-room', (req, res, next) => {
+        //     res.json({msg: 'hello world'});
+        //     next();
+        // });
 
         this.registerRouteHandlers(context);
     }
@@ -20,7 +25,7 @@ export class RouterStartupCommand extends Module {
     }
 
     registerRouteHandlers (context: Express) {
-        this.registerHandler(context, 'sign-in-to-room', RouteSignInToGameRoom);
+        this.registerHandler(context, '/sign-in-to-room', RouteSignInToGameRoom);
     }
 
     private registerHandler (ctx: Express, route: string, notification: Notification<any>): void {
@@ -29,8 +34,7 @@ export class RouterStartupCommand extends Module {
                 req: req,
                 res: res,
                 next: next
-            } as IRouteNotification)
-                .then(() => next());
+            } as IRouteNotification);
         });
     }
 }

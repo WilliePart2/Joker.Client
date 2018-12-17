@@ -18,7 +18,7 @@ export class SignInToGameRoomCommand extends BaseCommand {
             let gameRoomManager: GameRoomManager = this.facade().retrieveProxy(GameRoomManager.NAME) as GameRoomManager;
             let user: IUserDocument = await this.sendNotficationToModule(UserManager, CreateFakeUser);
             let gameTable: ITableDocument = await gameRoomManager.createFakeGameRoom(user);
+            return gameTable;
         }
-
     }
 }

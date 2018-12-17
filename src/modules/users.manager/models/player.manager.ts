@@ -15,9 +15,9 @@ export class PlayerManager extends Proxy {
                         if (playerDoc) {
                             resolve(playerDoc);
                         } else {
-                            let newPlayer: IPlayerDocument = {
-                                userId: new ObjectId()
-                            };
+                            // let newPlayer: IPlayerDocument = {
+                            //     // userId: new ObjectId()
+                            // };
                         }
                     }
                 })

@@ -15,7 +15,7 @@ export class AppStartup {
     }
 
     private async startupMainGameModules (app: Express) {
-        await this.startupModule(Router, RouterStartupCommand);
+        await this.startupModule(Router, RouterStartupCommand, {context: app});
     }
 
 
