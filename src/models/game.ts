@@ -9,6 +9,14 @@ export const gameSchema = new Schema({
     maximumRounds: {
         type: Number,
         required: true
+    },
+    isFinished: {
+        type: Boolean,
+        required: true
+    },
+    gameState: {
+        type: Number,
+        required: true
     }
 });
 

@@ -4,6 +4,7 @@ import path from 'path';
 import morgan from 'morgan'
 import serveStatic from 'serve-static';
 import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
 import { AppStartup } from "./app.startup";
 import { CONNECTION_URL, DB_OPTIONS } from "./config/db.config";
 
@@ -18,7 +19,7 @@ expressApp.use((req, res, next) => {
 });
 
 expressApp.use(morgan('tiny'));
-
+expressApp.use(bodyParser.json());
 expressApp.use('/Joker.PureMVC.Game', serveStatic(path.join(__dirname, './../../Joker.PureMVC.Game')));
 expressApp.use('/assets', serveStatic(path.resolve(__dirname, '../assets')));
 expressApp.use(serveStatic(path.join(__dirname, './'), {

@@ -3,7 +3,9 @@ import { Module } from "../../core/Module";
 import { Express, Request, Response } from "express";
 import { IRouteNotification, IStartupData } from "../../../app.common.interfaces";
 import { RouteSignInToGameRoomCommand } from "./route.sign.in.to.game.room.command";
-import { RouteSignInToGameRoom } from "../router.notifications";
+import { RouteAuthenticateUser, RouteSignInToGameRoom, RouteSubscribeToGameState } from "../router.notifications";
+import { RouteAuthenticateUserCommand } from "./route.authenticate.user.command";
+import { RouteSubscribeToGameStateUpdatesCommand } from "./route.subscribe.to.game.state.updates.command";
 
 export class RouterStartupCommand extends Module {
     async execute(notification: Notification<IStartupData>): Promise<any> {
@@ -12,20 +14,19 @@ export class RouterStartupCommand extends Module {
         let nBody: IStartupData = notification.body,
             context: Express = nBody.context;
 
-        // context.use('/sign-in-to-room', (req, res, next) => {
-        //     res.json({msg: 'hello world'});
-        //     next();
-        // });
-
         this.registerRouteHandlers(context);
     }
 
     registerCommands () {
-        this.facade().registerCommand(RouteSignInToGameRoom, RouteSignInToGameRoomCommand)
+        this.facade().registerCommand(RouteSignInToGameRoom, RouteSignInToGameRoomCommand);
+        this.facade().registerCommand(RouteAuthenticateUser, RouteAuthenticateUserCommand);
+        this.facade().registerCommand(RouteSubscribeToGameState, RouteSubscribeToGameStateUpdatesCommand);
     }
 
     registerRouteHandlers (context: Express) {
         this.registerHandler(context, '/sign-in-to-room', RouteSignInToGameRoom);
+        this.registerHandler(context, '/authenticate', RouteAuthenticateUser);
+        this.registerHandler(context, '/subscribe-to-game-state', RouteSubscribeToGameState)
     }
 
     private registerHandler (ctx: Express, route: string, notification: Notification<any>): void {

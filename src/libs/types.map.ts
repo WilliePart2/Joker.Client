@@ -51,3 +51,23 @@ export enum TTableType {
 export enum TCombinationTypes {
   STANDARD
 }
+
+export enum TResponseTypes {
+  SUCCESS,
+  NOT_FOUND,
+  ERROR
+}
+
+export enum TGameStateTypes {
+  AWAIT_STARTING,
+  PLAYERS_CHOOSE_PLACE,
+  CARDS_DISTRIBUTION,
+  AWAIT_USER_ACTION,
+  USER_PERFORM_ACTION,
+  PASS_ACTIVE_ROLE_TO_ANOTHER_USER,
+  FINISHED
+}
+
+export enum TUserGameActionTypes {
+
+}

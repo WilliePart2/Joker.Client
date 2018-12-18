@@ -1,4 +1,5 @@
-import { Document } from "mongoose";
+import { Document, Schema } from "mongoose";
+import { IMongooseObjectId } from "../../app.common.interfaces";
 
 export interface IUserObject {
     name: string;
