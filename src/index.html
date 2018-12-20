@@ -27,6 +27,18 @@
                 .then(json => json);
         }
 
+        function createURL (path) {
+            let location = window.location,
+                protocol = location.protocol,
+                host = location.hostname,
+                port = location.port,
+                fullPath = `${protocol}//${host}:${port}/${path}`;
+
+            console.log(`CREATED URL: ${fullPath}`);
+
+            return fullPath;
+        }
+
         function loadGame ({pathToGameBinaries, gameEntryPoint, ...rest}) {
             return new Promise(resolve => {
                 if (!pathToGameBinaries) {
@@ -42,18 +54,6 @@
             });
         }
 
-        function createURL (path) {
-            let location = window.location,
-                protocol = location.protocol,
-                host = location.hostname,
-                port = location.port,
-                fullPath = `${protocol}//${host}:${port}/${path}`;
-
-            console.log(`CREATED URL: ${fullPath}`);
-
-            return fullPath;
-        }
-
         function runGame ({gameKey, ...rest}) {
             let gameContainer = document.getElementById('gameContainer'),
                 gameInitData = {
@@ -65,8 +65,22 @@
             game = new window[gameKey](gameInitData);
         }
     </script>
+    <style>
+        *, :before, *:after {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        #gameContainer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
-<div id="gameContainer" style="height: 700px;"></div>
+<div id="gameContainer"></div>
 </body>
 </html>

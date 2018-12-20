@@ -5,7 +5,6 @@ import { AuthenticationService } from "../models/authentication.service";
 import { IUserDocument } from "../../../interfaces/db/user.interfaces";
 import { IRouteNotification } from "../../../app.common.interfaces";
 import { Response } from "express";
-import { IUserObjResponse } from "../../router/interfaces/router.response.interfaces";
 
 export class AuthenticateUserCommand extends BaseCommand {
     async execute(notification: Notification<IRouteNotification>): Promise<any> {
